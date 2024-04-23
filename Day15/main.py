@@ -22,7 +22,7 @@ MENU = {
         "price": 3.00}
 }
 coffee_machine = {'water': 300, "milk": 200, "coffee": 100}
-
+profit = 0
 
 def report():
     #print report 
@@ -40,7 +40,7 @@ while on:
     if choice in ['espresso', 'cappuccino', 'latte']:
         #check sufficient resources to make drink 
         for ingredient in MENU[choice]["ingredients"]:
-            if MENU[choice]["ingredients"][ingredient] < coffee_machine[ingredient]:
+            if MENU[choice]["ingredients"][ingredient] <= coffee_machine[ingredient]:
                 sufficient_resource = True
             else: 
                 suffient_resource = False
@@ -55,10 +55,12 @@ while on:
             total = float(quarters)*.25+float(dimes)*.1+float(nickels)*.05+float(pennies)*.01
             if total >= MENU[choice]["price"]:
                 #remove resources from report
-                # change = round(total - MENU[choice]["price"], 2)
-                # coffee_machine['cash'] = coffee_machine['cash'] + total - change
-                # if change != 0:
-                #     print(f"Here is ${change} in change.")
+                change = round(total - MENU[choice]["price"], 2)
+                
+                if change != 0:
+                    print(f"Here is ${change} in change.")
+                
+                profit = profit + MENU[choice]["price"]
                 for key in coffee_machine: 
                     coffee_machine[key] = coffee_machine[key]-MENU[choice]["ingredients"][key]
             else: 
