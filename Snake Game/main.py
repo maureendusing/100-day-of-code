@@ -49,8 +49,8 @@ game_playing = True
 
 while game_playing:
     move()
-    if t1.xcor() > 300 or t1.xcor() < -300 or t1.ycor() > 300 or t1.ycor() < -300:
-        game_playing = False
-        exit
+    # if t1.xcor() > 300 or t1.xcor() < -300 or t1.ycor() > 300 or t1.ycor() < -300:
+    #     game_playing = False
+    #     exit
 
 screen.exitonclick()
