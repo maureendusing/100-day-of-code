@@ -10,12 +10,13 @@ playing = "True"
 turtle_write = Turtle()
 turtle_write.hideturtle()
 turtle_write.penup()
-turtle_write.goto((-40,275))
+turtle_write.goto((-40,270))
 turtle_write.pendown()
 turtle_write.color("white")
 
 turtle_write.write("Score: " + str(score), font=("Arial",20,"normal"))
 t1=Turtle(shape="square")
+t1.speed("slowest")
 t1.color("white")
 t1.penup()
 t2 =Turtle(shape="square")
@@ -35,11 +36,21 @@ def left():
 def right():
     t1.setheading(0)
     t1.forward(20)
+def move():
+    t1.forward(20)
 
 screen.listen()
 screen.onkey(up, "Up")
 screen.onkey(down, "Down")
 screen.onkey(left, "Left")
 screen.onkey(right, "Right")
+
+game_playing = True
+
+while game_playing:
+    move()
+    if t1.xcor() > 300 or t1.xcor() < -300 or t1.ycor() > 300 or t1.ycor() < -300:
+        game_playing = False
+        exit
 
 screen.exitonclick()
