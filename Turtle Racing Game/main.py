@@ -1,38 +1,43 @@
+from tkinter import Button, Label, Toplevel
 from turtle import Turtle, Screen 
+import random
+
+#known issues: no sanitization/validation of the user bet
 
 screen = Screen()
+racing = False
 screen.setup(width=500, height=400)
 user_bet = screen.textinput(title="Make your bet", prompt="Which turtle will win the race? Enter a color: ")
 print(user_bet)
 
-red = Turtle(shape='turtle')
-red.color("red")
-red.penup()
-red.goto(-225, 40)
+colors = ["red", "orange", "yellow", "green", "blue", "purple"]
+turtles = []
 
-orange = Turtle(shape='turtle')
-orange.color("orange")
-orange.penup()
-orange.goto(-225, 20)
+for index in range(0,6): 
+    new_turtle = Turtle(shape="turtle")
+    new_turtle.penup()
+    new_turtle.color(colors[index])
+    new_turtle.goto(-225, 60-(index+1)*20)
+    turtles.append(new_turtle)
 
-yellow = Turtle(shape='turtle')
-yellow.color("yellow")
-yellow.penup()
-yellow.goto(-225, 0)
+if user_bet: 
+    racing = True
 
-green = Turtle(shape='turtle')
-green.color("green")
-green.penup()
-green.goto(-225, -20)
+while racing: 
+    for turtle in turtles: 
+        distance = random.randint(0,10)
+        turtle.forward(distance)
+        if turtle.xcor() > 230:
+            racing = False
+            winning_turtle = turtle.pencolor()
 
-blue = Turtle(shape='turtle')
-blue.color("blue")
-blue.penup()
-blue.goto(-225, -40)
-
-purple = Turtle(shape='turtle')
-purple.color("yellow")
-purple.penup()
-purple.goto(-225, -60)
+turtle_write= Turtle()
+turtle_write.penup()
+turtle_write.goto(-200,150)
+turtle_write.write(f"winner was {winning_turtle}")
+if winning_turtle == user_bet:
+    print("YOU WON!")
+else: 
+    print("YOU LOST :(")
 
 screen.exitonclick()
