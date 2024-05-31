@@ -2,7 +2,7 @@ from tkinter import Button, Label, Toplevel
 from turtle import Turtle, Screen 
 import random
 
-#known issues: no sanitization/validation of the user bet
+#known issue: UI -> Winner printing, dropdown input 
 
 screen = Screen()
 racing = False
